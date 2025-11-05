@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#1E1E1E"  # Cor primária (pode manter ou ajustar conforme necessário)
+backgroundColor = "#FFFFFF"  # Fundo branco
+secondaryBackgroundColor = "#F0F0F0"  # Cor do fundo secundário
+textColor = "#000000"  # Cor do texto (preto)
+font = "sans serif"  # Tipo de fonte (pode ser alterado para 'serif' ou 'monospace')
