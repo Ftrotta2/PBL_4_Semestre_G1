@@ -2,14 +2,16 @@ import pandas as pd
 import plotly.express as px
 from datetime import datetime
 
+# Aqui temos um objeto que gerará os gráficos a partir do arquivo CSV que é gerado pelo receptor
+
 class Grafico (object):
     def __init__(self, nome_arquivo: str):
-        self.membro = "";
+        self.membro = ""; # membro inferior da pessoa -> gráfico da coxa / canela / pé
         self.nome_arquivo = nome_arquivo;
         self.df = pd.read_csv(nome_arquivo);
         self.colunas = self.df.columns.tolist();
-        match len(self.colunas):
-            case 4:
+        match len(self.colunas): # vendo quantas colunas tem, o que indica quantos sensores temos
+            case 4: # e consequentemente quantos gráficos serão gerados (o print não é nescessário)
                 self.graficos = 1
                 self.tamanho = 4
                 print("Um gráfico")
@@ -25,7 +27,7 @@ class Grafico (object):
                 self.graficos = 0
                 self.tamanho = 0
                 print("Erro\nGráficos fora do escopo")
-                
+    # get e set para o nome do arquivo e membro inferior            
     def getNomeArquivo(self) -> str:
         return self.nome_arquivo;
     def setNomeArquivo(self, nome_arquivo: str):
@@ -35,7 +37,7 @@ class Grafico (object):
     def setMembro(self, membro: str):
         self.membro = membro
     
-    def Tempo(self) -> int:
+    def Tempo(self) -> int: # alterando o tempo de milisegundos para segundos
         ms = self.colunas[self.tamanho -1]
         if ms in self.df.columns and not self.df[ms].isnull().all():
             self.df['tempo_s'] = (self.df[ms] - self.df[ms].iloc[0]) / 1000.0
@@ -44,8 +46,8 @@ class Grafico (object):
             print("Erro: Coluna 't_ms' nao encontrada ou esta vazia.")
             return 0
     
-    def GerarGrafico(self) -> int:
-        for i in range(self.graficos):
+    def GerarGrafico(self) -> int: # função que vai gerar os gráficos fazendo um loop de acordo com o número de sensores
+        for i in range(self.graficos): # número máx de sensores = 3 (é possivel alterar)
             match i:
                 case 0:
                     self.setMembro("Coxa")
