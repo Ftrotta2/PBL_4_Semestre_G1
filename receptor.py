@@ -4,7 +4,7 @@ from datetime import datetime
 
 # --- 1. CONFIGURE A PORTA COM AQUI ---
 # Esta é a porta "Outgoing" do Bluetooth (ex: "COM5")
-PORT = "COM5" 
+PORT = "COM3" 
 # ----------------------------------
 
 BAUD = 115200  
