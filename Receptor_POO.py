@@ -34,6 +34,7 @@ class SalvarArquivo (object):
         self.qtd_sensores = qtd_sensores
         self.nome_arquivo = f"HOMEFISIO_DADOS_{self.qtd_sensores}_SENSORES_{datetime.now().strftime('%Y%M%d_%H%M%S')}.csv"
         self.header = ""
+        self.dados = [{}]
     
     def setNomeArquivo(self, nome: str):
         self.nome_arquivo = nome
@@ -43,6 +44,8 @@ class SalvarArquivo (object):
         self.qtd_sensores = qtd_sensores
     def getQtdSensores(self) -> int:
         return self.qtd_sensores
+    def getDados(self) -> dict:
+        return self.dados
     
     def setHeader(self, header: str = ""):
         if header == "":
@@ -69,6 +72,16 @@ class SalvarArquivo (object):
                         if line and line.count(',') == self.qtd_sensores*3:
                             f.write(line + "\n")
                             f.flush()
+                            
+                            valores = [float(v) for v in line.split(',')]
+                            self.dados = [{'p1': valores[i],
+                                         'r1': valores[i+1],
+                                         'y1': valores[i+2],
+                                         'p2': valores[i+3],
+                                         'r2': valores[i+4],
+                                         'y2': valores[i+5],
+                                         'tempo': valores[i+6]}
+                                        for i in range(0, len(valores), 3)]
                     
                     except serial.SerialException as e:
                         print(f"Erro de leitura serial: {e}. Desconectado.")
