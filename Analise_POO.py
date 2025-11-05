@@ -47,6 +47,7 @@ class Grafico (object):
             return 0
     
     def GerarGrafico(self) -> int: # função que vai gerar os gráficos fazendo um loop de acordo com o número de sensores
+        self.Tempo()
         for i in range(self.graficos): # número máx de sensores = 3 (é possivel alterar)
             match i:
                 case 0:
