@@ -1,0 +1,11 @@
+# Arquivos do Flutter/Dart
+/build
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Arquivos do Android
+android/.gradle
+android/local.properties
+.idea/
+*.iml
